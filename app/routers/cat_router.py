@@ -5,6 +5,9 @@ from transformers import AutoImageProcessor, AutoModelForImageClassification
 import os
 import io
 from typing import List
+import pillow_heif
+
+pillow_heif.register_heif_opener()
 
 router = APIRouter()
 
@@ -25,8 +28,8 @@ async def classify_cat(files: List[UploadFile] = File(...)):
             contents = await file.read()
             image = Image.open(io.BytesIO(contents)).convert("RGB")
             images.append(image)
-    except Exception:
-        return {"error": "Invalid image file"}
+    except Exception as e:
+        return {"error": f"Invalid image file: {str(e)}"}
 
     inputs = cat_processor(images=images, return_tensors="pt")
 
@@ -35,7 +38,6 @@ async def classify_cat(files: List[UploadFile] = File(...)):
         logits = outputs.logits
 
     probs = torch.nn.functional.softmax(logits, dim=-1)
-
     avg_probs = probs.mean(dim=0, keepdim=True)
 
     k = 3
