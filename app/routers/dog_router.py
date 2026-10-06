@@ -14,7 +14,7 @@ router = APIRouter()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 dog_model_path = os.path.join(BASE_DIR, "models", "dog_model")
 
-dog_processor = AutoImageProcessor.from_pretrained(dog_model_path)
+dog_processor = AutoImageProcessor.from_pretrained(dog_model_path, use_fast=False)
 dog_model = AutoModelForImageClassification.from_pretrained(dog_model_path)
 dog_model.eval()
 

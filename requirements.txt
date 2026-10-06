@@ -1,3 +1,6 @@
+# CPU-only PyTorch wheels (much smaller than the default CUDA build)
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 annotated-doc==0.0.4
 annotated-types==0.7.0
 anyio==4.12.1
@@ -5,10 +8,18 @@ click==8.3.1
 fastapi==0.135.1
 h11==0.16.0
 idna==3.11
+pillow==11.0.0
+pillow-heif==0.18.0
 pydantic==2.12.5
 pydantic_core==2.41.5
+python-dotenv==1.0.1
 python-multipart==0.0.22
+safetensors==0.7.0
+slowapi==0.1.9
 starlette==0.52.1
+timm==1.0.24
+torch==2.5.1
+transformers==4.46.3
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 uvicorn==0.41.0
